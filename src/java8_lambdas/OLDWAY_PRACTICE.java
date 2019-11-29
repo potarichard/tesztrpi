@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OLDWAY_PRACTICE {	
 	
@@ -37,6 +38,12 @@ public class OLDWAY_PRACTICE {
 				new Person("Matthew", "Arnold", 39));
 				
 		
+//		0. stream sort
+		people = people.stream()
+			.sorted((p1,p2) -> 	p1.last_name.compareTo(p2.last_name))
+			.collect(Collectors.toList());
+		
+		System.out.println();
 		
 //		1. sort by lastname
 		Collections.sort(people, new Comparator<Person>() {
