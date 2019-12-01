@@ -2,6 +2,8 @@ package executorService;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
@@ -149,11 +151,27 @@ public class CompleatableFutureExample {
 		}).thenApplyAsync(result -> {
 		    // Executed in a different thread from ForkJoinPool.commonPool()
 		    return result + " Processed Result";
+		}).thenApplyAsync(result -> {
+		    System.out.println(result);
+		    return null;
 		});
 		
-		System.out.println(welcome.get());
+		Executor executor = Executors.newFixedThreadPool(10);
+		welcome.thenRunAsync(() -> System.out.println("sshit"), executor );
 		
-		System.out.println("just main 2");
+//		welcome.get();		// ez megakasztja, ha nincs itt akor is lefut de nem akasztja meg a main szálat
+		
+		int i = 0;
+		
+		while(i<30)
+		{
+			System.out.println("just main 2  " + i);			
+			Thread.sleep(100);
+			
+			i++;
+		}
+		
+		
 		
 	}		// end main
 }

@@ -12,14 +12,15 @@ public class GetTaskNotificationWithoutBlocking {
 	    
 	    GetTaskNotificationWithoutBlocking listener = new GetTaskNotificationWithoutBlocking();
 	    
-//	    CompletableFuture<String> f = 
+	    CompletableFuture<String> f = CompletableFuture.supplyAsync(svc::work);	    		
 	    
-	    		CompletableFuture.supplyAsync(svc::work).thenAccept(listener::notify);
-	    		
+	    f.thenAccept(listener::notify);
 	    
-//	    f.thenAccept(listener::notify);
+//	    f.get();
 	    
 	    System.out.println("Exiting main()");
+	    
+	    Thread.sleep(10000);
 	  }
 	
 	  void notify(String msg) {
