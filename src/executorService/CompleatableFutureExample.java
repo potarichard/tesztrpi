@@ -152,8 +152,8 @@ public class CompleatableFutureExample {
 		    // Executed in a different thread from ForkJoinPool.commonPool()
 		    return result + " Processed Result";
 		}).thenApplyAsync(result -> {
-		    System.out.println(result);
-		    return null;
+//		    System.out.println(result);
+		    return result;
 		});
 		
 		Executor executor = Executors.newFixedThreadPool(10);
@@ -169,6 +169,9 @@ public class CompleatableFutureExample {
 			Thread.sleep(100);
 			
 			i++;
+			
+			if(welcome.isDone())
+				System.out.println("future ready " + welcome.get());	
 		}
 		
 		
