@@ -1,5 +1,8 @@
 package HackerRank.LinkedLists;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PrintElementsAndMore {
 
 	static class SinglyLinkedListNode 
@@ -192,20 +195,104 @@ public class PrintElementsAndMore {
     	return null;
     }
     
+    static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode node) {
+
+    	SinglyLinkedListNode head = node;
+    	
+    	while(node.next != null)
+    	{
+    		if(node.data == node.next.data)
+    			node.next = node.next.next;
+    		else
+    			node = node.next;
+    	}
+    	
+    	return head;
+    }
+    
+//          d         s	 
+    // 1 -> 2 -> 3 -> 4
+//    		|		  |
+//    		----------- 
+    static boolean hasCycle(SinglyLinkedListNode head) {
+
+
+    	SinglyLinkedListNode sim = head;
+    	SinglyLinkedListNode dob = head;
+    	
+    	while(sim != null && dob != null && dob.next != null)
+    	{
+    		sim = sim.next;
+    		dob = dob.next.next;
+    		
+    		if(sim == dob)
+    			return true;
+    	}
+    	
+    	return false;
+    }
+    
+    
+    // return node data where merged
+    // 10 -> 20 -> 30 -> 40
+    //			   |
+    // 1 -> 2 -> 3-|
+    
+    static int findMergeNode(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+
+    	SinglyLinkedListNode h1 = head1;
+    	SinglyLinkedListNode h2 = head2;
+    	
+    	Set<SinglyLinkedListNode> set1 = new HashSet<SinglyLinkedListNode>();
+    	Set<SinglyLinkedListNode> set2 = new HashSet<SinglyLinkedListNode>();
+    	
+    	while(head1 != null)
+    	{
+    		set1.add(head1);
+    		head1 = head1.next;
+    	}
+    	
+    	while(head2 != null)
+    	{
+    		set2.add(head2);
+    		head2 = head2.next;
+    	}
+    	
+    	head1 = h1;
+    	head2 = h2;
+    	
+    	while(head1 != null)
+    	{
+    		if(set2.contains(head1))
+    			return head1.data;
+    		
+    		head1 = head1.next;
+    	}
+    	
+    	while(head2 != null)
+    	{
+    		if(set1.contains(head2))
+    			return head2.data;
+    		
+    		head2 = head2.next;
+    	}
+    	
+    	return 0;
+    }
+    
 	public static void main(String[] args) 
 	{
 		
-		SinglyLinkedListNode hed = new SinglyLinkedListNode(1);
+		SinglyLinkedListNode hed = new SinglyLinkedListNode(10);		
+		hed.next = new SinglyLinkedListNode(20);
+		hed.next.next = new SinglyLinkedListNode(30);
+		hed.next.next.next = new SinglyLinkedListNode(40);
 		
-		hed.next = new SinglyLinkedListNode(2);
-		hed.next.next = new SinglyLinkedListNode(3);
-		hed.next.next.next = new SinglyLinkedListNode(4);
-		hed.next.next.next.next = new SinglyLinkedListNode(5);
-		hed.next.next.next.next.next = new SinglyLinkedListNode(6);
 		
 		SinglyLinkedListNode hed2 = new SinglyLinkedListNode(1);
 		hed2.next = new SinglyLinkedListNode(2);
-		hed2.next.next = new SinglyLinkedListNode(10);
+		hed2.next.next = new SinglyLinkedListNode(3);
+		hed2.next.next.next = hed.next.next;
 		
 //		insertNodeAtPosition(hed, 98, 2);		
 //		insertTail(hed, 4);
@@ -214,9 +301,12 @@ public class PrintElementsAndMore {
 //		deleteNode(hed, 0);
 //		reversePrint(hed);
 //		reverse(hed);		
-//		compareLists(hed, hed2);
+//		compareLists(hed, hed2);		
+//		mergeLists(hed, hed2);		
+//		removeDuplicates(hed);		
+//		hasCycle(hed);
 		
-		mergeLists(hed, hed2);
+		findMergeNode(hed, hed2);
 		
 		System.out.println();
 	}
