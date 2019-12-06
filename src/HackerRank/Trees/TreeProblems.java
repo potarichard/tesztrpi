@@ -111,7 +111,7 @@ public class TreeProblems {
 				
 				if(node.left.dist_left > L)
 				{
-					left_stack.add(node.left.data);
+					left_stack.add(node.left.data); 
 					L = node.left.dist_left;
 				}					
 				
@@ -140,6 +140,11 @@ public class TreeProblems {
 		
 		while(!right_que.isEmpty())
 			System.out.print(right_que.poll() + " ");
+	}
+	
+	public static void sideView(Node root)
+	{
+		
 	}
 	
 	public static void topViewOwn2(Node root)
@@ -257,6 +262,50 @@ public class TreeProblems {
         
     }
 	
+	
+	static Node lca(Node root, int v1, int v2)
+	{		
+		Stack<Node> path_1 = new Stack<TreeProblems.Node>();
+		Stack<Node> path_2 = new Stack<TreeProblems.Node>();
+		
+		findV(root, v1, path_1);
+		findV(root, v2, path_2);
+		
+		int i=0;
+		
+		while(i<path_1.size() && i<path_2.size())
+		{
+			if(path_1.get(i) == path_2.get(i))
+				root = path_1.get(i);
+			
+			i++;
+		}
+		
+		return root;
+	}
+	
+	static boolean findV(Node root, int v, Stack<Node> stack)
+	{
+		if(root == null)
+			return false;			
+		if(root.data == v)
+		{
+			stack.add(root);
+			return true;
+		}
+		
+		stack.add(root);
+			
+		if(findV(root.left, v, stack))
+			return true;
+		if(findV(root.right, v, stack))
+			return true;	
+		
+		stack.pop();
+		
+		return false;
+	}
+	
 	public static void main(String[] args) 
 	{
 		
@@ -266,17 +315,18 @@ public class TreeProblems {
 		root.right = new Node(3);
 		root.left.left = new Node(4);
 		root.left.right = new Node(5);
+		root.left.right.left = new Node(14);
 		root.left.right.right = new Node(6);
-		root.left.right.right.right = new Node(7);
-		
+		root.left.right.right.right = new Node(7);		
 		Node mr = root.left.right.right.right;
 		mr.left = new Node(8);
 		mr.left.left = new Node(9);
 		mr.left.left.left = new Node(10);
 		mr.left.left.left.left = new Node(11);
 		mr.left.left.left.left.left = new Node(12);
-		
 		mr.right = new Node(666);
+		
+		lca(root, 14, 12);
 		
 //		System.out.println(height(root));
 //		preOrder(root);
