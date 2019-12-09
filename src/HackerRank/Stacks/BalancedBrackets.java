@@ -7,7 +7,7 @@ public class BalancedBrackets {
 	static String isBalanced(String s) 
     {
 
-        Stack<Character> stack = new Stack<Character>();
+		Stack<Character> stack = new Stack<Character>();
         char[] sarr = s.toCharArray();
         
         if(sarr[0] == '}' || sarr[0] == ']' ||sarr[0] == ')')   
@@ -17,31 +17,38 @@ public class BalancedBrackets {
         {
             switch(ch)
             {
-            case '{':                
+            case '{':
+                stack.push(ch);
+                break;
             case '[':
+                stack.push(ch);
+                break;
             case '(':
-            	stack.push(ch);
+                stack.push(ch);
                 break;
                 
             case '}':
-                if(stack.empty() || stack.pop() != '{')
+                if (stack.empty() || (stack.peek() != '{')) {
                     return "NO";
-                break;
-            case ']':
-                if(stack.empty() || stack.pop() != '[')
-                    return "NO";
+                }
+                stack.pop();
                 break;
             case ')':
-                if(stack.empty() || stack.pop() != '(')
+                if (stack.empty() || (stack.peek() != '(')) {
                     return "NO";
+                }
+                stack.pop();
+                break;
+            case ']':
+                if (stack.empty() || (stack.peek() != '[')) {
+                    return "NO";
+                }
+                stack.pop();
                 break;
             }
         }
         
-        if(stack.size() == 0)
-            return "YES";
-        
-        return "NO";
+        return stack.empty() ? "YES" : "NO";
 
     }
 	
