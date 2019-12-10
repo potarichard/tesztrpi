@@ -1,5 +1,8 @@
 package HackerRank.Stacks;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class poisonusPlants {
 
@@ -76,11 +79,142 @@ public class poisonusPlants {
 		return days;
     }
 	
+	
+	
+	// stack lists!	
+//	6>5, 8>7>4, 7>3>1>1, 10
+	static int poisonousPlantsStackList(int[] plants) 
+	{
+		if(plants.length <= 0)
+			return 0;
+		
+		int days = 0;
+		List<Stack<Integer>> pests = new ArrayList<Stack<Integer>>();
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		stack.push(plants[0]);
+		
+		for(int i=1; i<plants.length; i++)
+		{
+			if(plants[i] <= plants[i-1])
+				stack.push(plants[i]);
+			else
+			{				
+				pests.add(stack);
+				stack = new Stack<Integer>();
+				stack.push(plants[i]);
+			}
+		}
+		
+		pests.add(stack);
+		
+		return days;
+	}
+	
+	// the first always lives
+	static int poisonousPlantsList(int[] plants) 
+	{		
+		if(plants.length <= 0)
+			return 0;
+		
+		int days = 0;
+		boolean mods = true;
+		boolean[] deaths = new boolean[plants.length];
+		Stack<Integer> dieing = new Stack<Integer>();
+		
+		
+		while(mods)
+		{
+			mods = false;
+			
+			for(int i=1; i<plants.length; i++)
+			{
+				if(deaths[i-1] && !deaths[i])
+				{
+					int living_index = i-2;
+					
+					while(deaths[living_index] && living_index >= 1)
+						living_index--;
+					
+					if(plants[i] > plants[living_index])
+						dieing.push(i);
+				}
+				else if(plants[i] > plants[i-1] && !deaths[i])
+					dieing.push(i);
+			}
+			
+			while(!dieing.isEmpty())
+			{
+				deaths[dieing.pop()] = true;
+				mods = true;
+			}
+			
+			if(mods)
+				days++;
+		}
+		
+		
+		return days;
+	}
+	
+	static int poisonousPlantsListSimpler(int[] plants) 
+	{		
+		if(plants.length <= 0)
+			return 0;
+		
+		int days = 0;
+		boolean mods = true;
+		Stack<Integer> dieing = new Stack<Integer>();
+		
+		
+		while(mods)
+		{
+			mods = false;
+			
+			for(int i=1; i<plants.length; i++)
+			{
+				if(plants[i-1] < 0 && plants[i] > 0)
+				{
+					int living_index = i-2;
+					
+					while(plants[living_index] < 0 && living_index >= 1)
+						living_index--;
+					
+					if(plants[i] > plants[living_index])
+						dieing.push(i);
+				}
+				else if(plants[i] > plants[i-1] && plants[i] > 0)
+					dieing.push(i);
+			}
+			
+			while(!dieing.isEmpty())
+			{
+				plants[dieing.pop()] *= -1;
+				mods = true;
+			}
+			
+			if(mods)
+				days++;
+		}
+		
+		
+		return days;
+	}
+	
+	// 1.  4, 3, -7, 5,  -6, 4, 2
+	// 2.  4, 3, -7, -5, -6, 4, 2
+	// 3.  4, 3, -7, -5, -6, -4, 2
+	
 	public static void main(String[] args) {
 		
-		int[] pest = {6, 5, 8, 4, 7, 10, 9};
+					//0  1  2  3  4  5  6
+		int[] pest = {4, 3, 7, 5, 6, 4, 2};
 
-		poisonousPlants(pest);
+//		poisonousPlants(pest);
+		
+//		poisonousPlantsList(pest);		// ez oke
+		
+		poisonousPlantsListSimpler(pest);
 	}
 
 }
