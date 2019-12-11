@@ -57,18 +57,12 @@ public class DownToZero {
 		Queue<Item> que = new LinkedList<Item>();
 		
 		que.add(new Item(n, 0));	
-		
-		List<Item> path_1 = new ArrayList<Item>();
-		List<Item> path_2 = new ArrayList<Item>();
-		
-		path_1.add(que.peek());
-		path_2.add(que.peek());
-		
+				
 		while(!que.isEmpty())
 		{
 			Item from_que = que.poll();
 			
-			System.out.println(from_que.value + " ");
+			System.out.print(from_que.value + ", ");
 			
 			first = new Item(from_que.value-1, from_que.step+1);
 			
@@ -77,29 +71,25 @@ public class DownToZero {
 			if(largest_div != 1 && largest_div != from_que.value)
 				second = new Item(largest_div, from_que.step+1);
 			else
-				second = new Item(from_que.value-1, from_que.step+1);			
-			
-//			System.out.println(first.value + " step: " + first.step);
-//			
-//			System.out.println(second.value + " step: " + second.step);
+				second = new Item(from_que.value-1, from_que.step+1);		
 			
 			if(first.value == 0 || second.value == 0)
 			{
 				if(first.value == 0)
-					return first.step+1;
+					return first.step;
 				else if(second.value == 0)
-					return second.step+1;
+					return second.step;
 			}		
 			
 			else
 			{
-//				if(first.value == second.value)
-//					que.add(first);
-//				else
-//				{
+				if(first.value == second.value)
+					que.add(first);
+				else
+				{
 					que.add(first);
 					que.add(second);
-//				}
+				}
 				
 			}
 		}
@@ -114,7 +104,7 @@ public class DownToZero {
 	public static void main(String[] args) 
 	{
 	
-		System.out.println("\n" + downToZeroDynamic(11));	// 17 x 18 es matrix 
+		System.out.println("\n" + downToZeroDynamic(94));	// 17 x 18 es matrix 
 		
 	}
 

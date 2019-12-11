@@ -4,8 +4,10 @@ public class HeapArrayRepresentation {
 
 	
 	// max heap
+	
 	// insert
 	// remove
+	// print
 	
 	int[] heap;
 	int index = 0;
