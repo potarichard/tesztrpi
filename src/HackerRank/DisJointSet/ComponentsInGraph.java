@@ -2,6 +2,8 @@ package HackerRank.DisJointSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ComponentsInGraph {
 
@@ -12,7 +14,7 @@ public class ComponentsInGraph {
 	static int[] componentsInGraph(int[][] gb) 
 	{
 	    graph = buildGraph(gb);
-	    HashMap<Integer, Boolean> visited = new HashMap<Integer, Boolean>();
+	    Set<Integer> visited = new HashSet<Integer>();
 
 	    int shortest = Integer.MAX_VALUE;
 	    int longest = 0;
@@ -20,16 +22,15 @@ public class ComponentsInGraph {
 	    // Note that our graph may be a disconnected graph
 	    // Consider vertices [1, 4], [1, 5], [3, 6], [3, 7], [3, 8]
 	    
-	    for(Integer i : graph.keySet())			// Go through every vertex in the graph
+	    for(Integer node : graph.keySet())
 	    {        
-	        if(visited.get(i) == null)
+	        if(!visited.contains(node))
 	        {         
 	            curCount = 0;                   // Reset traversal counter to 0
-	            DFSSearch(i, visited);          // Traverse it
-	                                            // After traversal, curCount contains the number of vertices in that graph. 
-	            								// This may or may not be the only graph
+	            DFSSearch(node, visited);       // Traverse it
+	                                            // After traversal, curCount contains the number of vertices in that graph
 
-	            longest = Math.max(curCount, longest);  
+	            longest  = Math.max(curCount, longest);  
 	            shortest = Math.min(curCount, shortest);
 	        }
 	    }
@@ -39,14 +40,14 @@ public class ComponentsInGraph {
 	 }
 
     // Standard DFS traversal, except on each recursive call, curCount is incremented
-    private static void DFSSearch(int curVal, HashMap<Integer, Boolean> visited)
+    private static void DFSSearch(int current_node, Set<Integer> visited)
     {
-        visited.put(curVal, true);
+        visited.add(current_node);
         curCount++;             			
 
-        for(Integer i : graph.get(curVal))
-            if(visited.get(i) == null)     
-                    DFSSearch(i, visited);     
+        for(Integer node : graph.get(current_node))
+            if(!visited.contains(node))     
+                    DFSSearch(node, visited);     
     }
 
 
@@ -59,20 +60,20 @@ public class ComponentsInGraph {
     {
 	    HashMap<Integer, ArrayList<Integer>> graph = new HashMap<Integer, ArrayList<Integer>>();
 
-	    for(int[] edge : gb)
+	    for(int[] node : gb)
 	    {
-	        int e0 = edge[0];
-	        int e1 = edge[1];
+	        int n0 = node[0];
+	        int n1 = node[1];
 
-	        if(graph.get(e0) == null)
-	            graph.put(e0, new ArrayList<Integer>());
+	        if(graph.get(n0) == null)
+	            graph.put(n0, new ArrayList<Integer>());
 	        
-	        if(graph.get(e1) == null)
-	            graph.put(e1, new ArrayList<Integer>());
+	        if(graph.get(n1) == null)
+	            graph.put(n1, new ArrayList<Integer>());
 	        
 
-	        graph.get(e0).add(e1);
-	        graph.get(e1).add(e0);
+	        graph.get(n0).add(n1);
+	        graph.get(n1).add(n0);
 	    }
 
 	    return graph;
