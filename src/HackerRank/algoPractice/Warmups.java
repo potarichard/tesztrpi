@@ -1,7 +1,12 @@
 package HackerRank.algoPractice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Warmups {
 
@@ -128,12 +133,26 @@ public class Warmups {
     	return mods;
     }
     
-    // O(1) 
-    static boolean check(int[][] square)
+    
+    // O(1)     
+    static boolean check(Integer[][] square)
     {
     	int r1, r2, r3,
     		c1, c2, c3,
     		d1, d2;
+    	
+    	Set<Integer> set = new HashSet<Integer>();
+    	
+    	for(int i=0; i<3; i++)
+    	{
+    		for(int k=0; k<3; k++)
+        	{
+        		if(set.contains(square[i][k]))
+        			return false;
+        		else
+        			set.add(square[i][k]);
+        	}
+    	}
     	
     	r1 = square[0][0] + square[0][1] + square[0][2];
     	r2 = square[1][0] + square[1][1] + square[1][2];
@@ -144,7 +163,7 @@ public class Warmups {
     	c3 = square[0][2] + square[1][2] + square[2][2];
     	
     	d1 = square[0][0] + square[1][1] + square[2][2];
-    	d2 = square[0][2] + square[1][1] + square[0][2];
+    	d2 = square[0][2] + square[1][1] + square[2][0];
     	
     	
     	if(		r1 == 15 && r2 == 15 && r3 == 15 &&
@@ -155,68 +174,92 @@ public class Warmups {
     	return false;
     }
     
-//  4. magic square generator
+//  4_0. magic square generator
     static List<Integer[][]> magicSquareGeneratorBruteForce()
     {
-    	List<Integer[][]> magic_squares = new ArrayList<Integer[][]>();
+    	List<Integer[][]> magic_squares = new ArrayList<Integer[][]>();    	
+    	Integer[][] square = new Integer[3][3];    	    	
+    	List<Integer[]> possibles = generateArrays(1,9);
     	
-    	int[][] square = new int[3][3];
     	
-    	mSqGen(magic_squares, square, 0, 0, 1);
+    	for(int in=0; in<possibles.size(); in++)
+		{    		
+    		square[0] = possibles.get(in);
+			
+			for(int kn=0; kn<possibles.size(); kn++)
+    		{
+				square[1] = possibles.get(kn);								
+    			
+    			for(int hn=0; hn<possibles.size(); hn++)
+        		{
+    				square[2] = possibles.get(hn); 
+    				
+    				if(check(square))
+    					magic_squares.add(square.clone());
+        		}
+    		}
+		}
     	
     	return magic_squares;
     }
     
-//    static void mSqGen(List<Integer[][]> magic_squares, int[][] square, int row, int col, int num)
-//    {
-//    	if(row == 2 && col == 2)
-//    	{
-//    		if(check(square))
-//    			System.out.println("ok");
-//    	}
-//    	
-//    	else
-//		{
-//			for(int r=row; r<3; r++)
-//        	{
-//        		for(int c=col; c<3; c++)
-//        		{
-//        			if(num<=9)
-//        			{
-//        				square[r][c] = num;            			 
-//            			mSqGen(magic_squares, square, r, c, num+1);
-//        			}
-//        			else
-//        			{
-//        				num = 1;         			 
-//        			}
-//        		}
-//        	}    	
-//		}
-//    	
-//    }
-    
-    static void mSqGen(List<Integer[][]> magic_squares, int[][] square, int row, int col, int num)
-    {    	
-    	if(row == 2 && col == 2)
-    	{
-    		if(check(square))
-    			System.out.println("ok");
-    	}    	
+    static List<Integer[]> generateArrays(int start, int end)
+    {     	
+    	Integer[] arr = new Integer[3];
+    	List<Integer[]> vectors = new ArrayList<Integer[]>();
     	
-    	else
-    	{
-    		if(num > 9)
-    			num = 1;
-    		
-			for(int r=row; r<3; r++)
-        		for(int c=col; c<3; c++)
+    	for(int in=start; in<=end; in++)
+		{
+			arr[0] = in;
+			
+			for(int kn=start; kn<=end; kn++)
+    		{
+    			arr[1] = kn;
+    			
+    			for(int hn=start; hn<=end; hn++)
         		{
-    				square[r][c] = num; 
-        			mSqGen(magic_squares, square, r, c, num+1);
+        			arr[2] = hn;        			
+        			vectors.add(arr.clone());
         		}
-    	}
+    		}
+		}
+    	
+    	return vectors;
     }
+    
+    
+//  6 array permutations, recursive
+    static void printArr(int a[], int n) 
+    { 
+        for (int i=0; i<n; i++) 
+            System.out.print(a[i] + " "); 
+        System.out.println(); 
+    } 
+  
+    static void heapPermutation(int a[], int size, int n) 
+    { 
+        if (size == 1) 
+            printArr(a,n); 
+  
+        for (int i=0; i<size; i++) 
+        { 
+            heapPermutation(a, size-1, n); 
+   
+            if (size % 2 == 1) 
+            { 
+                int temp = a[0]; 
+                a[0] = a[size-1]; 
+                a[size-1] = temp; 
+            } 
+  
+            else
+            { 
+                int temp = a[i]; 
+                a[i] = a[size-1]; 
+                a[size-1] = temp; 
+            } 
+        } 
+    } 
     
 	public static void main(String[] args) {
 		
@@ -227,9 +270,26 @@ public class Warmups {
 						{4, 5, 7},
 						{6, 1, 6}};
 		
-		formingMagicSquare(sq);
+		
+		long time = System.currentTimeMillis();
 		
 		List<Integer[][]> magic_squares = magicSquareGeneratorBruteForce();
+		
+		time = System.currentTimeMillis() - time;
+		
+		System.out.println(time + " ms runtime");
+		
+		for(Integer[][] square : magic_squares)
+		{
+			System.out.println();
+			
+			for(int i=0; i<square.length; i++)
+			{
+				for(int k=0; k<square[i].length; k++)
+					System.out.print(square[i][k] + " ");
+				System.out.println();
+			}
+		}
 		
 		System.out.println();
 	}
