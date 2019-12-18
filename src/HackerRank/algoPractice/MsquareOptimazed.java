@@ -6,15 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MagicSquareWithPermutation {
-
+public class MsquareOptimazed {
 	
-
+	static List<Integer[][]> msq = new ArrayList<Integer[][]>();
 	
     // all row, col sums and 2 atlo
     static boolean check(Integer[][] square)
     {
-    	Set<Integer> set = new HashSet<Integer>();
+//    	Set<Integer> set = new HashSet<Integer>();
     	Integer[] rows = new Integer[square.length];
     	Integer[] cols = new Integer[square.length];  
     	Integer d1 = 0, d2 = 0;
@@ -25,16 +24,16 @@ public class MagicSquareWithPermutation {
     	int col=0, row=0;
     	
 //    	check duplicates
-    	for(int i=0; i<square.length; i++)
-    	{
-    		for(int k=0; k<square.length; k++)
-        	{
-        		if(set.contains(square[i][k]))
-        			return false;
-        		else
-        			set.add(square[i][k]);
-        	}
-    	}
+//    	for(int i=0; i<square.length; i++)
+//    	{
+//    		for(int k=0; k<square.length; k++)
+//        	{
+//        		if(set.contains(square[i][k]))
+//        			return false;
+//        		else
+//        			set.add(square[i][k]);
+//        	}
+//    	}
     	
 //    	check sums
     	while(row<square.length)
@@ -100,14 +99,26 @@ public class MagicSquareWithPermutation {
         System.out.println(); 
     } 
   
-    static void heapPermutation(List<Integer[]> allPermut, Integer a[], int size, int n) 
+    static double checked_squares = 0;
+    
+    static boolean heapPermutation(Integer a[], int size, int n) 
     { 
         if (size == 1) 
-        	allPermut.add(a.clone());            
+        {
+        	checked_squares++;
+        	Integer[][] sq = makeSquare(a);
+        	if(check(sq))
+        	{
+        		msq.add(sq);
+        		return true;
+        	}
+        		
+        }
   
         for (int i=0; i<size; i++) 
         { 
-            heapPermutation(allPermut, a, size-1, n); 
+            if(heapPermutation(a, size-1, n))
+            	return true;
    
             if (size % 2 == 1) 
             { 
@@ -122,18 +133,12 @@ public class MagicSquareWithPermutation {
                 a[i] = a[size-1]; 
                 a[size-1] = temp; 
             } 
-        } 
+        }
+        
+		return false; 
     } 
     
-    static List<Integer[][]> getSquares(List<Integer[]> allPermut)
-    {
-    	List<Integer[][]> msq = new ArrayList<Integer[][]>();
-    	
-    	for(Integer[] permut : allPermut)
-    		msq.add(makeSquare(permut));
-    		
-		return msq;
-    }
+   
     
     static Integer[][] makeSquare(Integer[] permut)
     {
@@ -166,25 +171,18 @@ public class MagicSquareWithPermutation {
 	{
 		Integer[] arr;
 		List<Integer[]> allPermut = new ArrayList<Integer[]>();
-		List<Integer[][]> magicsquares = new ArrayList<Integer[][]>();
-		List<Integer[][]> allsquares;
 		
 		arr = createArr(size, start, end);		
-		heapPermutation(allPermut, arr, arr.length, arr.length);
-		allsquares = getSquares(allPermut);		
+		heapPermutation(arr, arr.length, arr.length);
 		
-		for(Integer[][] sq : allsquares)
-			if(check(sq))
-				magicsquares.add(sq);
 		
-		return magicsquares;
+		return msq;
 	}
     
 	public static void main(String[] args) {
 		
 		
-		List<Integer[][]> magicsquares = magicSquares(3, 1, 9);
-		
+		List<Integer[][]> magicsquares = magicSquares(4, 1, 16);
 		
 		
 
