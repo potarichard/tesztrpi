@@ -18,23 +18,23 @@ public class SherlockArray {
 		if(arr[i] < arr[e])
 		{
 			sum_l = 0;
-			sum_r = arr[e];
+			sum_r = arr[e--];
 		}
 		
 		else if(arr[i] > arr[e])
 		{
-			sum_l = arr[i];
+			sum_l = arr[i++];
 			sum_r = 0;
 		}
 		
-		while(e > (i+1))
+		while(e >= (i+1))
 		{
-			if(arr[i] > arr[e])
+			if(sum_l > sum_r)
 			{
 				sum_r += arr[e];
 				e--;
 			}
-			else if(arr[i] < arr[e])
+			else if(sum_l < sum_r)
 			{
 				sum_l += arr[i];
 				i++;
