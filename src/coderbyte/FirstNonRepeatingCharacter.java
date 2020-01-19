@@ -7,25 +7,25 @@ import java.util.Map;
 // 2. loop stop when map -> 1 value
 public class FirstNonRepeatingCharacter {
 
-	static char firstNonrepeating(String word)
+	static String firstNonrepeating(String str)
 	{
 		Map<Character, Integer> map = new HashMap<Character, Integer>();
 		
-		for(int i=0; i<word.length(); i++)
+		for(int i=0; i<str.length(); i++)
 		{
-			Integer val = map.get(word.charAt(i));
+			Integer val = map.get(str.charAt(i));
 			
 			if(val != null)
-				map.put(word.charAt(i), val+1);
+				map.put(str.charAt(i), val+1);
 			else
-				map.put(word.charAt(i), 1);
+				map.put(str.charAt(i), 1);
 		}
 		
-		for(int i=0; i<word.length(); i++)
-			if(map.get(word.charAt(i)) == 1)
-					return word.charAt(i);
+		for(int i=0; i<str.length(); i++)
+			if(map.get(str.charAt(i)) == 1)
+					return str.charAt(i) + "";
 		
-		return 0;
+		return "";
 	}
 	
 	public static void main(String[] args) {

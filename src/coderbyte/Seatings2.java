@@ -13,7 +13,7 @@ package coderbyte;
 // For the seats I made a bool matrix. From the input array, I mark all reserved seat in the matrix as true.
 // Make 2 helper arrays for possible horizontal and vertical moves. Loop on empty seats in the matrix, and start a BFS from, 
 // each of them, explore all neighbours with the help of the 2 direction helper arrays. If a neighbour seat is also empty,
-// increment the combination counter. After each direction has been exhasted, mar the current
+// increment the combination counter. After each direction has been exhausted, mar the current
 // seat as true. Then let the BFS continue.
 
 public class Seatings2 {
@@ -27,16 +27,16 @@ public class Seatings2 {
 		
 		boolean[][] visited = new boolean[rows][cols];
 		
-		int[] horizontal_move 	= {-1,  1,  0,  0};
-		int[] vertical_move 	= { 0,  0, -1,  1};		
+		int[] horizontal_move 	= {-1,  1,  0,  0};			// left , right
+		int[] vertical_move 	= { 0,  0, -1,  1};			// up, down
 
 		
 		// mark already reserved seats, as true
 		for(int i=1; i<arr.length; i++)
 		{
 			
-			if(arr[i]/2  >= cols || arr[i]/2-1  >= cols)
-				break;
+//			if(arr[i]/2  >= cols || arr[i]/2  >= cols)
+//				break;
 			
 			// odd row
 			if(arr[i]%2 == 1)
@@ -91,7 +91,7 @@ public class Seatings2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int[] array = {10, 1,4,6,7,8,9,10};
+		int[] array = {8, 1, 8};
 		
 		combinations(array);
 		

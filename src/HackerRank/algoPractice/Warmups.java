@@ -141,6 +141,7 @@ public class Warmups {
     		c1, c2, c3,
     		d1, d2;
     	
+<<<<<<< Updated upstream
     	Set<Integer> set = new HashSet<Integer>();
     	
     	for(int i=0; i<3; i++)
@@ -153,6 +154,9 @@ public class Warmups {
         			set.add(square[i][k]);
         	}
     	}
+=======
+    	System.out.println();
+>>>>>>> Stashed changes
     	
     	r1 = square[0][0] + square[0][1] + square[0][2];
     	r2 = square[1][0] + square[1][1] + square[1][2];
@@ -166,10 +170,20 @@ public class Warmups {
     	d2 = square[0][2] + square[1][1] + square[2][0];
     	
     	
+    	
+    	
     	if(		r1 == 15 && r2 == 15 && r3 == 15 &&
     			c1 == 15 && c2 == 15 && c3 == 15 &&
     			d1 == 15 && d2 == 15)
+    	{
+    		System.out.println( 
+    		    	square[0][0] + " " + square[0][1] + " " + square[0][2] + "\n" +
+    		    	square[1][0] + " " + square[1][1] + " " + square[1][2] + "\n" +
+    		    	square[2][0] + " " + square[2][1] + " "+ square[2][2] );
+    		
     		return true;
+    	}
+    		
     	
     	return false;
     }
@@ -203,6 +217,7 @@ public class Warmups {
     	return magic_squares;
     }
     
+<<<<<<< Updated upstream
     static List<Integer[]> generateArrays(int start, int end)
     {     	
     	Integer[] arr = new Integer[3];
@@ -260,6 +275,66 @@ public class Warmups {
             } 
         } 
     } 
+=======
+//    static void mSqGen(List<Integer[][]> magic_squares, int[][] square, int row, int col, int num)
+//    {
+//    	if(row == 2 && col == 2)
+//    	{
+//    		if(check(square))
+//    			System.out.println("ok");
+//    	}
+//    	
+//    	else
+//		{
+//			for(int r=row; r<3; r++)
+//        	{
+//        		for(int c=col; c<3; c++)
+//        		{
+//        			if(num<=9)
+//        			{
+//        				square[r][c] = num;            			 
+//            			mSqGen(magic_squares, square, r, c, num+1);
+//        			}
+//        			else
+//        			{
+//        				num = 1;         			 
+//        			}
+//        		}
+//        	}    	
+//		}
+//    	
+//    }
+    
+    static void mSqGen(List<Integer[][]> magic_squares, int[][] square, int row, int col, int num)
+    { 
+		for(int i=1; i<=9; i++)
+		{
+			for(int r=0; r<3; r++)
+			{
+				if(col<3)
+				{
+					square[r][col] = i; 
+					
+					if(check(square))
+					{
+						System.out.println("heeeej");
+						mSqGen(magic_squares, square, r, col+1, i);						
+					}
+					else
+					{
+						square[r][col] = i; 
+						mSqGen(magic_squares, square, r, col+1, i);
+					}
+					
+					
+				}						
+			}
+		}
+    }
+    
+    
+
+>>>>>>> Stashed changes
     
 	public static void main(String[] args) {
 		
