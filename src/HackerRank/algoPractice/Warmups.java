@@ -141,7 +141,6 @@ public class Warmups {
     		c1, c2, c3,
     		d1, d2;
     	
-<<<<<<< Updated upstream
     	Set<Integer> set = new HashSet<Integer>();
     	
     	for(int i=0; i<3; i++)
@@ -154,9 +153,6 @@ public class Warmups {
         			set.add(square[i][k]);
         	}
     	}
-=======
-    	System.out.println();
->>>>>>> Stashed changes
     	
     	r1 = square[0][0] + square[0][1] + square[0][2];
     	r2 = square[1][0] + square[1][1] + square[1][2];
@@ -217,7 +213,6 @@ public class Warmups {
     	return magic_squares;
     }
     
-<<<<<<< Updated upstream
     static List<Integer[]> generateArrays(int start, int end)
     {     	
     	Integer[] arr = new Integer[3];
@@ -275,7 +270,6 @@ public class Warmups {
             } 
         } 
     } 
-=======
 //    static void mSqGen(List<Integer[][]> magic_squares, int[][] square, int row, int col, int num)
 //    {
 //    	if(row == 2 && col == 2)
@@ -305,7 +299,7 @@ public class Warmups {
 //    	
 //    }
     
-    static void mSqGen(List<Integer[][]> magic_squares, int[][] square, int row, int col, int num)
+    static void mSqGen(List<Integer[][]> magic_squares, Integer[][] square, int row, int col, int num)
     { 
 		for(int i=1; i<=9; i++)
 		{
@@ -334,8 +328,6 @@ public class Warmups {
     
     
 
->>>>>>> Stashed changes
-    
 	public static void main(String[] args) {
 		
 		lcm(6, 8);		// 24
