@@ -19,7 +19,6 @@ public class BellmanFord
 	    // Only in the worst case does it take V-1 iterations for the Bellman-Ford algorithm to complete. Another stopping condition is when we're unable to
 	    // relax an edge, this means we have reached the optimal solution early.
 	    boolean relaxedAnEdge = true;
-
 	    for (int v = 0; v < V - 1 && relaxedAnEdge; v++) 
 	    {
 	      relaxedAnEdge = false;
@@ -53,13 +52,13 @@ public class BellmanFord
 	}
 	
 	
-	  public static double[] bellmanFordAlgorithmOptimazed(GraphWeighted graphA, int start) 
+	  public double[] bellmanFordAlgorithmOptimazed(GraphWeighted graphA, int start) 
 	  {
-
 		    // Initialize the distance to all nodes to be infinity except for the start node which is zero.
 		  	int V = graphA.node_count;
 		    double[] dist = new double[V];
 		    List<Edge>[] graph = graphA.nodes;
+		    
 		    java.util.Arrays.fill(dist, Double.POSITIVE_INFINITY);
 		    dist[start] = 0;
 	

@@ -16,7 +16,7 @@ public class Main {
 		graph.addEdge(8, 5, 1);
 		graph.addEdge(8, 2, 1);
 		
-		List<Integer> shorthest_path = graph.reconstructPath(0, 2);
+		List<Integer> shorthest_path = graph.shortestPath(0, 2);
 		
 		System.out.println(shorthest_path);		
 		

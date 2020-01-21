@@ -121,9 +121,9 @@ public class TopologicalSort {
 	    	char[] top_order = new char[nodes.entrySet().size()];
 	    	
 	    	Set<Character> visited = new HashSet<Character>();
-	    	Stack<Character> visited_nodes = new Stack<Character>();
+	    	Queue<Character> visited_nodes = new LinkedList<Character>();
 	    	
-	    	int i = 0; 
+	    	int i = top_order.length - 1; 
 	    	
 	    	for(Entry<Character, Node> entry : nodes.entrySet())
 	    	{
@@ -132,14 +132,14 @@ public class TopologicalSort {
 	    			dfs2(entry.getKey(), visited, visited_nodes, nodes);
 	    			
 	    			while(!visited_nodes.isEmpty())
-	    				top_order[i++] = visited_nodes.pop();
+	    				top_order[i--] = visited_nodes.poll();
 	    		}
 	    	}
 	    	
 	    	return top_order;
 	    }
 	    
-	    private void dfs2(char node, Set<Character> visited, Stack<Character> visited_nodes, Map<Character, Node> nodes)
+	    private void dfs2(char node, Set<Character> visited, Queue<Character> visited_nodes, Map<Character, Node> nodes)
 	    {
 	    	visited.add(node);
 	    	
@@ -253,7 +253,7 @@ public class TopologicalSort {
 //		M
 		
 		char[] top_1 = graph.topologicalSort();
-//		char[] top_2 = graph.topologicalSort2();
+		char[] top_2 = graph.topologicalSort2();
 		
 		graph.buildPath('H', top_1);
 		

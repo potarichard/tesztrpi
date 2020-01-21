@@ -7,10 +7,10 @@ public class GraphWeighted
 {
 	public static class Edge implements Comparable<Edge>
 	{
-	    double cost;
-	    int from, to;
+	    public int cost;
+	    public int from, to;
 
-	    public Edge(int from, int to, double cost) 
+	    public Edge(int from, int to, int cost) 
 	    {
 	      this.to = to;
 	      this.from = from;
@@ -29,7 +29,7 @@ public class GraphWeighted
 	 }
 	
 	int node_count;
-	List<Edge>[] nodes;
+	public List<Edge>[] nodes;
 
 	@SuppressWarnings("unchecked")
 	public GraphWeighted(int vertecies)

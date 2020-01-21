@@ -118,12 +118,12 @@ public class CoinChangeProblem
 	public static void main(String[] args) 
 	{
 		
-		int arr[] = {5, 2, 1}; 
+		int arr[] = {1, 2, 3}; 
         int m = arr.length; 
         
         System.out.println( countRecursive(arr, m, 5));
         System.out.println( countWaysSimpleArrayDP(arr, m, 5));
-        System.out.println( countWaysMatriyDP_b2bswe(arr, 5));
+        System.out.println( countWaysMatriyDP_b2bswe(arr, 4));
 	}
 
 }

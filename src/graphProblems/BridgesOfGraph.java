@@ -8,7 +8,7 @@ import java.util.List;
 public class BridgesOfGraph 
 {
 
-	private int n, id;
+	private int n, id = 0;
 	private int[] low, ids;
 	private boolean[] visited;
 	private List<Integer>[] graph;
@@ -24,7 +24,6 @@ public class BridgesOfGraph
 		visited = new boolean[n];	
 		bridges = new ArrayList<Integer>();	
 		
-		id = 0;
 		
 		for (int i = 0; i < n; i++) 
 			if (!visited[i]) 
@@ -50,6 +49,7 @@ public class BridgesOfGraph
 	      if (!visited[to]) 
 	      {
 	        dfs(to, at, bridges);
+	        
 	        low[at] = Math.min(low[at], low[to]);
 	        
 	        if (ids[at] < low[to]) 

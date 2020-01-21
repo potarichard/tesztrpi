@@ -33,18 +33,6 @@ public class Graph
 	      this.value = value;
 	    }
 	  }
-
-	  private Comparator<Node> comparator = new Comparator<Node>() 
-	  {
-	        @Override
-	        public int compare(Node node1, Node node2) 
-	        {
-	          if (Math.abs(node1.value - node2.value) < EPS) 
-	        	  return 0;
-	          
-	          return (node1.value - node2.value) > 0 ? 1 : -1;
-	        }
-	  };
 	  
 	  private static final double EPS = 1e-6;
 	  private int V;
@@ -66,11 +54,10 @@ public class Graph
 	  public void addEdge(int from, int to, int cost) 
 	  {
 		  nodes.get(from).add(new Edge(from, to, cost));
-	  }
+	  }	  
 	  
 	  
-	  
-	  public List<Integer> reconstructPath(int start, int end) 
+	  public List<Integer> shortestPath(int start, int end) 
 	  {
 	    if (end < 0 || end >= V) 
 	    	throw new IllegalArgumentException("Invalid node index");
@@ -100,6 +87,18 @@ public class Graph
 		    
 		    min_distance[start] = 0;
 
+		    Comparator<Node> comparator = new Comparator<Node>() 
+			  {
+			        @Override
+			        public int compare(Node node1, Node node2) 
+			        {
+			          if (Math.abs(node1.value - node2.value) < EPS) 
+			        	  return 0;
+			          
+			          return (node1.value - node2.value) > 0 ? 1 : -1;
+			        }
+			  };
+		    
 		    // Keep a priority queue of the next most promising node to visit.
 		    PriorityQueue<Node> pq = new PriorityQueue<>(2 * V, comparator);
 		    
