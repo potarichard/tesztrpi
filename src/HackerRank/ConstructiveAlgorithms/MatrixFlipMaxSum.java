@@ -24,19 +24,22 @@ public class MatrixFlipMaxSum {
         int 	length = matrix.length,
         		new_length = matrix.length / 2,
         		last_element = length-1,
-        		sum = 0,
-        		other = 0,
-        		or_this = 0;
+        		sum = 0;
         
         for(int row=0; row<new_length; row++)
         {
             for(int col=0; col<new_length; col++)
             {
-            	or_this  = Math.max(matrix[last_element-row][col], matrix[last_element-row][last_element-col]);
-            	other 	 = Math.max(matrix[row][last_element-col], or_this);
-            	sum 	+= Math.max(matrix[row][col], other);
-            }
-                
+            	int top_left_corner 	= matrix[row][col];
+            	int top_right_corner 	= matrix[row][last_element-col]; 
+            	int bot_left_corner  	= matrix[last_element-row][col];
+            	int bot_right_corner 	= matrix[last_element-row][last_element-col];       
+            	            	
+            	int bot_max  		= Math.max(bot_left_corner, bot_right_corner);
+            	int top_max  		= Math.max(top_left_corner, top_right_corner);
+            	
+            	sum 	+= Math.max(bot_max, top_max);
+            }                
         }
 
         return sum;
