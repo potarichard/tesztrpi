@@ -7,7 +7,7 @@ public class GraphDirected
 {
 
 	int node_count;
-	List<Integer>[] nodes;
+	public List<Integer>[] nodes;
 	
 	@SuppressWarnings("unchecked")
 	public GraphDirected(int vertecies)
