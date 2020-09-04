@@ -5,20 +5,20 @@ import java.util.Set;
 
 public class PrintElementsAndMore {
 
-	static class SinglyLinkedListNode 
+	static class Node 
 	{
       int data;
-      SinglyLinkedListNode next;
+      Node next;
       
-      public SinglyLinkedListNode() {}
+      public Node() {}
       
-      public SinglyLinkedListNode(int val)
+      public Node(int val)
       {
     	  this.data = val;
       }
 	}
 	
-	static void print(SinglyLinkedListNode head)
+	static void print(Node head)
 	{
 		
 		while(head != null)
@@ -29,35 +29,35 @@ public class PrintElementsAndMore {
 		
 	}
 	
-	static SinglyLinkedListNode insertTail(SinglyLinkedListNode node, int val)
+	static Node insertTail(Node node, int val)
 	{
 		if(node == null)
-			return new SinglyLinkedListNode(val);
+			return new Node(val);
 		
-		SinglyLinkedListNode head = node;
+		Node head = node;
 		
 		while(node.next != null)
 			node = node.next;
 		
-		node.next = new SinglyLinkedListNode();
+		node.next = new Node();
 		node.next.data = val;
 		
 		return head;
 	}
 	
-	static SinglyLinkedListNode insertHead(SinglyLinkedListNode node, int val)
+	static Node insertHead(Node node, int val)
 	{
-		SinglyLinkedListNode newhead = new SinglyLinkedListNode(val);
+		Node newhead = new Node(val);
 		
 		newhead.next = node;
 		
 		return newhead;
 	}
 	
-	static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode node, int data, int position) 
+	static Node insertNodeAtPosition(Node node, int data, int position) 
 	{
 		int pos = 0;
-		SinglyLinkedListNode head = node;
+		Node head = node;
 		
 		while(node != null)
 		{			
@@ -66,22 +66,22 @@ public class PrintElementsAndMore {
 			node = node.next;
 		}
 		
-		SinglyLinkedListNode temp = node.next;
+		Node temp = node.next;
 		
-		node.next = new SinglyLinkedListNode(data);
+		node.next = new Node(data);
 		node.next.next = temp;
 		
 		
 		return head;
     }
 	
-    static SinglyLinkedListNode deleteNode(SinglyLinkedListNode node, int position) 
+    static Node deleteNode(Node node, int position) 
     {
     	if(position == 0)
     		return node.next;
     	
     	int pos = 0;
-    	SinglyLinkedListNode head = node;
+    	Node head = node;
     	
     	while(node.next != null)
 		{	
@@ -97,7 +97,7 @@ public class PrintElementsAndMore {
     }
     
 	
-    static void reversePrint(SinglyLinkedListNode head) 
+    static void reversePrint(Node head) 
     {
     	if(head == null)
     		return;
@@ -106,10 +106,10 @@ public class PrintElementsAndMore {
     }
 
     
-    static SinglyLinkedListNode reverse(SinglyLinkedListNode node) 
+    static Node reverse(Node node) 
     {
-    	SinglyLinkedListNode prev = null;
-    	SinglyLinkedListNode next = null;
+    	Node prev = null;
+    	Node next = null;
     	
     	while(node != null)
     	{
@@ -123,7 +123,7 @@ public class PrintElementsAndMore {
     	return prev;
     }
     
-    static boolean compareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) 
+    static boolean compareLists(Node head1, Node head2) 
     {
 
     	if(head1 == null && head2 == null)
@@ -145,7 +145,7 @@ public class PrintElementsAndMore {
     }
     
     
-    static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) 
+    static Node mergeLists(Node head1, Node head2) 
     {
     	if(head1 == null && head2 == null)
     		return null;
@@ -156,7 +156,7 @@ public class PrintElementsAndMore {
     	
     	if(head1.data < head2.data)
     	{
-    		SinglyLinkedListNode head_of_1 = head1;
+    		Node head_of_1 = head1;
     		
     		while(head1 != null)
     		{
@@ -172,7 +172,7 @@ public class PrintElementsAndMore {
 
     	else if(head2.data < head1.data)
     	{
-    		SinglyLinkedListNode head_of_2 = head2;
+    		Node head_of_2 = head2;
     		
     		while(head2 != null)
     		{
@@ -195,9 +195,9 @@ public class PrintElementsAndMore {
     	return null;
     }
     
-    static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode node) {
+    static Node removeDuplicates(Node node) {
 
-    	SinglyLinkedListNode head = node;
+    	Node head = node;
     	
     	while(node.next != null)
     	{
@@ -214,11 +214,11 @@ public class PrintElementsAndMore {
     // 1 -> 2 -> 3 -> 4
 //    		|		  |
 //    		----------- 
-    static boolean hasCycle(SinglyLinkedListNode head) {
+    static boolean hasCycle(Node head) {
 
 
-    	SinglyLinkedListNode sim = head;
-    	SinglyLinkedListNode dob = head;
+    	Node sim = head;
+    	Node dob = head;
     	
     	while(sim != null && dob != null && dob.next != null)
     	{
@@ -238,13 +238,13 @@ public class PrintElementsAndMore {
     //			   |
     // 1 -> 2 -> 3-|
     
-    static int findMergeNode(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+    static int findMergeNode(Node head1, Node head2) {
 
-    	SinglyLinkedListNode h1 = head1;
-    	SinglyLinkedListNode h2 = head2;
+    	Node h1 = head1;
+    	Node h2 = head2;
     	
-    	Set<SinglyLinkedListNode> set1 = new HashSet<SinglyLinkedListNode>();
-    	Set<SinglyLinkedListNode> set2 = new HashSet<SinglyLinkedListNode>();
+    	Set<Node> set1 = new HashSet<Node>();
+    	Set<Node> set2 = new HashSet<Node>();
     	
     	while(head1 != null)
     	{
@@ -280,19 +280,41 @@ public class PrintElementsAndMore {
     	return 0;
     }
     
+    // every odd position first, than concat every even position node (like 1 list from odd nodes, 1 from the evcen and concat them)
+    // 1. 2. 3. 4. 5. 6. 7.
+    // 2->1->3->5->6->4->7
+    
+    public static Node evenOddByPosition(Node head)	{
+    	
+    	Node odd = head;
+    	Node even = head.next;
+    	Node evenHead = even;
+    	
+    	while(even != null && even.next != null)	
+    	{
+    		odd.next = even.next;
+    		odd = odd.next; 
+    		even.next = odd.next;
+    		even = even.next;
+    	}
+    	
+    	odd.next = evenHead;
+    	return head;
+    }
+    
 	public static void main(String[] args) 
 	{
 		
-		SinglyLinkedListNode hed = new SinglyLinkedListNode(10);		
-		hed.next = new SinglyLinkedListNode(20);
-		hed.next.next = new SinglyLinkedListNode(30);
-		hed.next.next.next = new SinglyLinkedListNode(40);
-		
-		
-		SinglyLinkedListNode hed2 = new SinglyLinkedListNode(1);
-		hed2.next = new SinglyLinkedListNode(2);
-		hed2.next.next = new SinglyLinkedListNode(3);
-		hed2.next.next.next = hed.next.next;
+//		SinglyLinkedListNode hed = new SinglyLinkedListNode(10);		
+//		hed.next = new SinglyLinkedListNode(20);
+//		hed.next.next = new SinglyLinkedListNode(30);
+//		hed.next.next.next = new SinglyLinkedListNode(40);
+//		
+//		
+//		SinglyLinkedListNode hed2 = new SinglyLinkedListNode(1);
+//		hed2.next = new SinglyLinkedListNode(2);
+//		hed2.next.next = new SinglyLinkedListNode(3);
+//		hed2.next.next.next = hed.next.next;
 		
 //		insertNodeAtPosition(hed, 98, 2);		
 //		insertTail(hed, 4);
@@ -306,7 +328,19 @@ public class PrintElementsAndMore {
 //		removeDuplicates(hed);		
 //		hasCycle(hed);
 		
-		findMergeNode(hed, hed2);
+//		findMergeNode(hed, hed2);
+		
+		
+		
+		Node hed = new Node(2);
+		hed.next = new Node(1);
+		hed.next.next = new Node(3);
+		hed.next.next.next = new Node(5);
+		hed.next.next.next.next = new Node(6);
+		hed.next.next.next.next.next = new Node(4);
+		hed.next.next.next.next.next.next = new Node(7);
+		
+		evenOddByPosition(hed);
 		
 		System.out.println();
 	}

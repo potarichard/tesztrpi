@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+import tree.Node;
+
 
 public class TreeViews {
 
@@ -111,31 +113,80 @@ public class TreeViews {
 		System.out.println("implement right view");
 	}
 	
+	public static void printLargestEachRow(Node root)	{		
+		
+		Queue<Node> que = new LinkedList<Node>();	
+		
+		int count = 0;
+		Node node;
+		que.add(root);
+		int max = Integer.MIN_VALUE;
+		
+		while(true)
+		{
+			count = que.size();
+			
+			if(count == 0)
+				break;			
+			
+			while(count > 0)
+			{
+				node = que.poll();
+				
+				max = Math.max(max, node.data);
+				
+				if(node.left != null)
+					que.add(node.left);
+				
+				if(node.right != null)
+					que.add(node.right);
+				
+				count--;
+			}	
+			
+			System.out.println(max);
+			max = Integer.MIN_VALUE;
+		}
+	}
+	
 	public static void main(String[] args) {
+		
+//		Node 
+//		root = new Node(1);
+//		root.left = new Node(2);
+//		root.right = new Node(3);
+//		root.left.left = new Node(4);
+//		root.left.right = new Node(5);
+//		root.left.right.left = new Node(14);
+//		root.left.right.right = new Node(6);
+//		root.left.right.right.right = new Node(7);		
+//		Node mr = root.left.right.right.right;
+//		mr.left = new Node(8);
+//		mr.left.left = new Node(9);
+//		mr.left.left.left = new Node(10);
+//		mr.left.left.left.left = new Node(11);
+//		mr.left.left.left.left.left = new Node(12);
+//		mr.right = new Node(666);
+//		
+//		
+//		topViewOwn(root);
+//
+//		leftView(root);
+//		
+//		rightView(root);
+		
 		
 		Node 
 		root = new Node(1);
 		root.left = new Node(2);
 		root.right = new Node(3);
+		
 		root.left.left = new Node(4);
 		root.left.right = new Node(5);
-		root.left.right.left = new Node(14);
-		root.left.right.right = new Node(6);
-		root.left.right.right.right = new Node(7);		
-		Node mr = root.left.right.right.right;
-		mr.left = new Node(8);
-		mr.left.left = new Node(9);
-		mr.left.left.left = new Node(10);
-		mr.left.left.left.left = new Node(11);
-		mr.left.left.left.left.left = new Node(12);
-		mr.right = new Node(666);
+		root.right.left = new Node(6);
+		root.right.right = new Node(7);
 		
-		
-		topViewOwn(root);
-
-		leftView(root);
-		
-		rightView(root);
+		printLargestEachRow(root);
 	}
 
 }

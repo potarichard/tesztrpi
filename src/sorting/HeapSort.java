@@ -59,6 +59,14 @@ public class HeapSort
         System.out.println(); 
     } 
 	
+    
+	public static void main(String[] args) 
+	{
+		HeapSort hps = new HeapSort();
+		
+		hps.sort(new int[]{10, 5, 8, 1, 2, 52, 0});
+	}
+    
 }
 
 

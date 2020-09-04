@@ -90,6 +90,32 @@ public class MergeSort
     
     
     
+    // Driver code 
+    public static void main(String args[]) 
+    { 
+    	MergeSort ms = new MergeSort();
+    	
+        int arr[] = { 7, 2, 15, 9, 4, 6 }; 
+  
+        ms.sort(arr, 0, arr.length - 1); 
+        
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 //    /////////////////////////////////////////////////////   iterative merge sort       version ///////////
     public static void mergeSort(int[] array) 

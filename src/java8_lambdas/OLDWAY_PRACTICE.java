@@ -75,6 +75,8 @@ public class OLDWAY_PRACTICE {
 			}			
 		});
 		
+//		5. new way just here
+		printAllWithC(people, p -> p.last_name.startsWith("B"));
 	}
 
 
