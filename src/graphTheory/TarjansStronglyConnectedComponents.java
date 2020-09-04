@@ -56,6 +56,7 @@ public class TarjansStronglyConnectedComponents {
 		    low = new int[n];
 		    onStack = new boolean[n];
 		    stack = new ArrayDeque<>();
+		    
 		    Arrays.fill(ids, UNVISITED);
 
 		    for (int i = 0; i < n; i++) 
