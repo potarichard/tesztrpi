@@ -39,11 +39,11 @@ public class LambdaThisReference {
 		
 		LambdaThisReference ltr = new LambdaThisReference();
 		
-//		ltr.doProcess(10, i -> 
-//		{
-//			System.out.println("value of i: " + i);
-////			System.out.println(this); 	// static main method, nincs this, es nem is az "anonymus Process-t implementalo classra mutat" mert olyan nincs is lambda esetén
-//		});
+		ltr.doProcess(10, i -> 
+		{
+			System.out.println("value of i: " + i);
+//			System.out.println(this); 	// static main method, nincs this, es nem is az "anonymus Process-t implementalo classra mutat" mert olyan nincs is lambda esetén
+		});
 
 		ltr.execute();
 		
