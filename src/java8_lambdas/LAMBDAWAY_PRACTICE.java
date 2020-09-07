@@ -53,6 +53,8 @@ public class LAMBDAWAY_PRACTICE
 				new Person("Charlotte", "Bronte", 45),
 				new Person("Matthew", "Arnold", 39));				
 		
+//		0. custom
+		printAllWithConditionOwn(people, p -> p.first_name.startsWith("T"));
 		
 //		1. sort by lastname
 		Collections.sort(people, (p1, p2) -> p1.last_name.compareTo(p2.last_name));		

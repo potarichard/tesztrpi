@@ -28,7 +28,7 @@ public class BinarySearch
 		
 		while(start <= end)
 		{
-			mid = (start + end) / 2;
+			mid = start + (start + end) / 2;
 			
 			if(arr[mid] == number)
 				return mid;

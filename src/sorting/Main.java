@@ -39,8 +39,8 @@ public class Main
 //		SelectionSort sels = new SelectionSort();
 //		sels.sort(arr);								// 1,000 -> 4 ms | 10,000 -> 27 ms | 100,000 -> 3100 ms | 1,000,000 -> terminated timeout
 		
-//		QuickSort qs = new QuickSort();
-//		qs.sort(arr, 0, arr.length-1);				// 1,000 -> 1 ms | 10,000 -> 3 ms | 100,000 -> 16 ms | 1,000,000 -> 170 ms | 10,000,000 -> 2100 ms
+		QuickSort qs = new QuickSort();
+		qs.sort(arr, 0, arr.length-1);				// 1,000 -> 1 ms | 10,000 -> 3 ms | 100,000 -> 16 ms | 1,000,000 -> 170 ms | 10,000,000 -> 2100 ms
 		
 //		HeapSort heaps = new HeapSort();
 //		heaps.sort(arr);							// 1,000 -> 1 ms | 10,000 -> 3 ms | 100,000 -> 16 ms | 1,000,000 -> 155 ms | 10,000,000 -> 2253 ms

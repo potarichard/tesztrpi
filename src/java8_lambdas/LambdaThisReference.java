@@ -16,6 +16,10 @@ public class LambdaThisReference {
 		p.process(i);
 	}
 	
+	
+	public int doCalc(int i, Pow pow)	{
+		return pow.process(i);
+	}
 
 	
 	// az interface helyere a benne levo 1 db (csak 1 lehet ezert functional interface) methoddal kell passzolni az argumenteknek
@@ -51,6 +55,30 @@ public class LambdaThisReference {
 		Pow power = i -> i+i;			// ez JS nel is igy van, const pow = i => i+i,   then call like: pow(5)
 		
 		System.out.println("power ami sum: " + power.process(5));
+		
+		System.out.println();
+		
+		
+		int ret = ltr.doCalc(25, sum -> sum + 33);
+		
+		System.out.println(ret);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

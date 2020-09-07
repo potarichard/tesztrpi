@@ -3,15 +3,15 @@ package mypackage;
 public class LookAndSay 
 {
 
-	// 112
-	// megy egy marker i tol,  ha uj szam jon a marker = i
-	// ha ugyanaza  szam jon marker = i
+	// 112, megy egy marker i tol,  ha uj szam jon a marker = i, ha ugyanaza  szam jon marker = i
+	
+	
+	
 	public String LNS(String num)
 	{		
 		String 	ret  = "";
 		char	what = num.charAt(0);
-		int 	marker = 0,
-				i = 0;
+		int 	marker = 0,	i = 0;
 		
 		
 		for(i=0; i<num.length(); i++)
@@ -19,15 +19,23 @@ public class LookAndSay
 			if(what != num.charAt(i))
 			{		
 				what = num.charAt(i);
-				ret += num.substring(marker, i).length() + num.substring(marker, marker+1);
+				ret += getWhat(marker, i, num);
 				marker = i;				
 			}				
 		}
 		
-		ret += num.substring(marker, i).length() + num.substring(marker, marker+1);
+		ret += getWhat(marker, i, num);
 		
 		return ret;
 		
+	}
+	
+	private String getWhat(int marker, int i, String word) {
+		
+		int count = word.substring(marker, i).length();
+		String value = word.substring(marker, marker+1);
+		
+		return count + value;
 	}
 	
 	public void printToN(int n)
@@ -49,7 +57,7 @@ public class LookAndSay
 
 		System.out.println(result + "\n" );
 		
-		lns.printToN(20);
+//		lns.printToN(20);
 	}
 
 }

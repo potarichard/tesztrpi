@@ -23,6 +23,7 @@ class Test<T>
     public static <U> void genericDisplay (U element) 
     { 
         System.out.println(element.getClass().getName() + " = " + element); 
+        
     } 
     
     
